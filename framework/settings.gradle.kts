@@ -19,6 +19,9 @@ include("serve-mbp")
 include("spring-boot-starter")
 include("dependencies")
 
+include("logging-i18n:logging-annotations")
+include("logging-i18n:logging-processor")
+
 //project(":spring-boot-starter").name = "walkin-framework-spring-boot-starter"
 
 dependencyResolutionManagement {

@@ -18,8 +18,8 @@ gradlePlugin {
         id = "java-conventions"
         implementationClass = "JavaConventions"
     }
-    plugins.register("MessageConventions") {
-        id = "message-conventions"
-        implementationClass = "MessageConventions"
+    plugins.register("I18nConventions") {
+        id = "i18n-conventions"
+        implementationClass = "I18nConventions"
     }
 }

@@ -1,7 +1,7 @@
 plugins {
     `java-library`
     id("java-conventions")
-    id("message-conventions")
+    id("i18n-conventions")
 }
 
 
