@@ -1,0 +1,4 @@
+pro.walkin.framework.boot.FrameworkConfiguration
+pro.walkin.framework.boot.JpaRepositoryConfiguration
+pro.walkin.framework.boot.UseCaseConfiguration
+pro.walkin.framework.boot.SquigglyConfiguration
