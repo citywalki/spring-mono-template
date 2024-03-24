@@ -1,1 +1,5 @@
-
+pro.walkin.base.boot.BaseComponentConfiguration
+pro.walkin.base.boot.BizTracerConfiguration
+pro.walkin.base.boot.ExceptionConfiguration
+pro.walkin.base.boot.JacksonConfiguration
+pro.walkin.base.boot.SecurityConfiguration

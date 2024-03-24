@@ -22,4 +22,8 @@ gradlePlugin {
         id = "i18n-conventions"
         implementationClass = "I18nConventions"
     }
+    plugins.register("QueryDSLConventions") {
+        id = "querydsl"
+        implementationClass = "QueryDSLConventions"
+    }
 }

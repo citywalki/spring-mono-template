@@ -37,11 +37,12 @@ class JavaConventions : Plugin<Project> {
             }
 
             target.configurations.all {
-                exclude("org.springframework.boot", "spring-boot-starter-logging")
+                //exclude("org.springframework.boot", "spring-boot-starter-logging")
                 exclude("ch.qos.logback", "logback-classic")
                 exclude("ch.qos.logback", "logback-core")
                 exclude("org.apache.poi", "poi-ooxml-schemas")
                 exclude("com.google.code.findbugs")
+                exclude(module = "log4j-to-slf4j")
 
                 //resolutionStrategy {
                 //    force("org.apache.logging.log4j:log4j-api:2.17.2")

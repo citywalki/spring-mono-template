@@ -7,6 +7,8 @@ dependencies {
     api(project(":domain"))
     api(project(":service"))
 
+    compileOnly("pro.walkin.framework:spring-boot-starter")
+
     compileOnly("org.apache.camel.springboot:camel-spring-boot-starter")
     compileOnly("org.springframework.boot:spring-boot-starter-web")
     compileOnly("org.springframework.boot:spring-boot-starter-thymeleaf")

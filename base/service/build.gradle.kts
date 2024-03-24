@@ -6,8 +6,10 @@ plugins {
 
 dependencies {
     implementation(project(":domain"))
+    implementation("pro.walkin.framework:serve")
 
-    implementation("org.dromara.hutool:hutool-crypto")
+    compileOnly("org.springframework.boot:spring-boot-starter-data-jpa")
+    compileOnly("cn.dev33:sa-token-spring-boot3-starter")
 
     compileOnly("cn.dev33:sa-token-spring-boot3-starter")
 

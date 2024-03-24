@@ -3,9 +3,6 @@ plugins {
     id("java-conventions")
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.graalvm.buildtools)
-    //val kotlinVersion = "1.9.22"
-    //kotlin("jvm") version kotlinVersion
-    //kotlin("plugin.spring") version kotlinVersion
 }
 
 group = "pro.walkin.boot"
@@ -22,7 +19,7 @@ repositories {
 
 dependencies {
     implementation("org.postgresql:postgresql:${libs.versions.postgresql}")
-    //    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     api("pro.walkin.base:spring-boot-starter")

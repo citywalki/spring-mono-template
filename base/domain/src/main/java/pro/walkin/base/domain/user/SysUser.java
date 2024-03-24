@@ -1,25 +1,28 @@
 package pro.walkin.base.domain.user;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Entity;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.envers.Audited;
+import org.hibernate.proxy.HibernateProxy;
 import pro.walkin.framework.dict.annotation.Dict;
 import pro.walkin.framework.entity.BaseEntity;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+import java.util.Objects;
+
+@Getter
+@Setter
+@ToString
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-@TableName("USER_PROFILE")
+@Entity
+@Audited
 @Schema(name = "用户信息")
-public class SysUser extends BaseEntity<SysUser> {
+public class SysUser extends BaseEntity {
 
+    @Schema(description = "用户名")
     private String userName;
 
     @Schema(description = "密码")
@@ -40,9 +43,30 @@ public class SysUser extends BaseEntity<SysUser> {
     @Schema(description = "状态")
     private String status;
 
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null)
+            return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o)
+                .getHibernateLazyInitializer()
+                .getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this)
+                .getHibernateLazyInitializer()
+                .getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass)
+            return false;
+        SysUser sysUser = (SysUser) o;
+        return getId() != null && Objects.equals(getId(), sysUser.getId());
+    }
 
-    public boolean isUserExist() {
-        return selectCount(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUserName, getUserName())) != 0;
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this)
+                .getHibernateLazyInitializer()
+                .getPersistentClass()
+                .hashCode() : getClass().hashCode();
     }
 
 }

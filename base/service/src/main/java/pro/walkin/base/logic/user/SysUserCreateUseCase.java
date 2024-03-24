@@ -1,14 +1,16 @@
 package pro.walkin.base.logic.user;
 
+import cn.dev33.satoken.secure.BCrypt;
 import lombok.RequiredArgsConstructor;
 import org.dromara.hutool.core.lang.Assert;
-import org.dromara.hutool.crypto.digest.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pro.walkin.base.domain.BaseConstant;
 import pro.walkin.base.domain.parameter.SysParameter;
 import pro.walkin.base.domain.user.SysUser;
 import pro.walkin.base.domain.user.command.SysUserCreate;
+import pro.walkin.base.logic.user.repository.SysParameterRepository;
+import pro.walkin.base.logic.user.repository.SysUserRepository;
 import pro.walkin.framework.api.UseCase;
 
 @Service
@@ -16,6 +18,9 @@ import pro.walkin.framework.api.UseCase;
 @RequiredArgsConstructor
 public class SysUserCreateUseCase implements UseCase<SysUserCreate, String> {
 
+    private final SysUserRepository sysUserRepository;
+
+    private final SysParameterRepository sysParameterRepository;
 
     @Override
     public String handle(SysUserCreate userCreate) {
@@ -28,10 +33,11 @@ public class SysUserCreateUseCase implements UseCase<SysUserCreate, String> {
                 .password(getPassword())
                 .build();
 
-        Assert.isFalse(sysUser.isUserExist());
+        Assert.isFalse(sysUserRepository.isUserExist(sysUser));
 
-        sysUser.insert();
-        return sysUser.getObjectKey();
+        sysUserRepository.save(sysUser);
+
+        return sysUser.getId();
     }
 
     /**
@@ -40,8 +46,9 @@ public class SysUserCreateUseCase implements UseCase<SysUserCreate, String> {
      * @return 密码
      */
     private String getPassword() {
-        var password = new SysParameter()
+        var password = sysParameterRepository
                 .getForPwdGeneratorPolicy()
+                .map(SysParameter::getValue)
                 .filter(parameter -> !BaseConstant.PWD_GENERATOR_POLICY_RANDOM.equals(parameter))
                 .orElseGet(() -> String.valueOf((int) ((Math.random() * 9 + 1) * 100000)));
 
